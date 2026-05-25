@@ -9,7 +9,7 @@ export default function Experience({ COLORS, FadeIn, EXPERIENCES }) {
       <div style={{ maxWidth: 1000, margin: "0 auto" }}>
         <FadeIn>
           <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 48 }}>
-            <div style={{ width: 40, height: 3, background: COLORS.terracotta, borderRadius: 2 }} />
+            <div style={{ width: 40, height: 4, background: COLORS.terracotta, borderRadius: 2 }} />
             <span style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 22, fontWeight: 700, color: COLORS.terracotta, letterSpacing: "2px" }}>EXPERIENCE</span>
           </div>
         </FadeIn>
