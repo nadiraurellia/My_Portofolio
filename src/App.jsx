@@ -56,7 +56,7 @@ const EXPERIENCES = [
   {
     role: "Head of DINAMIKA Division", org: "HIMSI — Telkom University Jakarta", period: "2024 — 2026", tag: "Leadership", color: COLORS.terracotta,
     points: [
-      "Led 50 members across 9 divisions within 4 departments + Executive Board.",
+      "Coordinating with 55 members from across 9 divisions and 4 departments, including the Executive Board.",
       "Managed end-to-end planning, cross-divisional task assignment & deliverable tracking.",
       "Spearheaded annual Ramadhan Berbagi program, mobilizing contributions from 4 academic programs.",
     ],

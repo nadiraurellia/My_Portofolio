@@ -4,23 +4,67 @@ import { useState, useEffect } from "react";
 const CERTIFICATIONS = [
     { id: 1, name: "IT Business Analyst Certification", year: "2026", accent: "#E27D60", images: ["/img/portofolio/sertifikasi.jpg"], description: "Professional certification validating expertise in business analysis, requirements gathering, and process optimization strategies." },
     { id: 2, name: "Training IT Business Analyst", year: "2026", accent: "#85DCB0", images: ["/img/portofolio/training ITBA1.png"], description: "Comprehensive training program covering the fundamentals of IT Business Analysis, stakeholder management, and agile methodologies." },
-    { id: 3, name: "SAP HR050 — Human Resource Mgmt", year: "2025", accent: "#E27D60", images: ["/img/thumbnail_analytics.png"], description: "Detailed course on SAP ERP Human Capital Management. Topics include personnel administration, time management, and payroll processes." },
-    { id: 4, name: "IBM Granite — Data Classification", year: "2025", accent: "#85DCB0", images: ["/img/diagram_process.png"], description: "Training on leveraging IBM Granite AI models for automated data classification, unstructured data analysis, and metadata tagging." },
-    { id: 5, name: "IBM Granite — Code Optimization", year: "2025", accent: "#E27D60", images: ["/img/thumbnail_erp.png"], description: "Mastery of code generation and optimization using IBM Granite's large language models tailored for enterprise applications." },
-    { id: 6, name: "SAP SCM500 — Supply Chain Mgmt", year: "2024", accent: "#85DCB0", images: ["/img/thumbnail_analytics.png"], description: "Foundational and advanced topics in SAP Supply Chain Management focusing on procurement, inventory management, and logistics." },
-    { id: 7, name: "SAP01 Fundamental", year: "2023", accent: "#E27D60", images: ["/img/diagram_process.png"], description: "Core introduction to SAP systems, navigating the SAP GUI, and understanding the integration between different business modules like FI, CO, MM, and SD." },
+    { id: 3, name: "SAP HR050 — Human Resource Mgmt", year: "2025", accent: "#E27D60", images: ["/img/portofolio/hrm.png"], description: "Has completed SAP HR050 certification as a requirement for passing the course. Topics include personnel administration, time management, and payroll processes." },
+    { id: 4, name: "IBM Granite — Data Classification", year: "2025", accent: "#85DCB0", images: ["/img/portofolio/code ibm.jpg"], description: "Training on leveraging IBM Granite AI models for automated data classification, unstructured data analysis, and metadata tagging." },
+    { id: 5, name: "IBM Granite — Code Optimization", year: "2025", accent: "#E27D60", images: ["/img/portofolio/code generalization.jpg"], description: "Mastery of code generation and optimization using IBM Granite's large language models tailored for enterprise applications." },
+    { id: 6, name: "SAP SCM500 — Supply Chain Mgmt", year: "2024", accent: "#85DCB0", images: ["/img/portofolio/scm.png"], description: "Has completed SAP SCM500 certification as a requirement for passing the course focusing on procurement, inventory management, and logistics." },
+    { id: 7, name: "SAP01 Fundamental", year: "2023", accent: "#E27D60", images: ["/img/portofolio/se.png"], description: "Has completed SAP01 Fundamental certification as a requirement for passing the course providing a core introduction to SAP systems, navigating the SAP GUI, and understanding the integration between different business modules like FI, CO, MM, and SD." },
     {
         id: 8, name: "English Proficiency Test Final Year", year: "2026", accent: "#E27D60", images: ["/img/portofolio/eprt1.png", "/img/portofolio/eprt2.png"], description: "Scoring 503 from 677 English Level B1 Intermediate as Final Year student"
     },
 ];
 
+// Fungsi untuk convert persentase ke rating bintang (1-5)
+function getStarRating(percentage) {
+    // Formula: percentage / 20 untuk mendapatkan rating 1-5
+    return Math.round((percentage / 20) * 2) / 2;
+}
+
+// Komponen untuk menampilkan bintang
+function StarRating({ rating, color }) {
+    const stars = [];
+    for (let i = 1; i <= 5; i++) {
+        if (i <= Math.floor(rating)) {
+            // Bintang penuh
+            stars.push(
+                <svg key={i} width="16" height="16" viewBox="0 0 24 24" fill={color} stroke={color} strokeWidth="1.5">
+                    <polygon points="12 2 15.09 10.26 23.77 11.35 17.88 17.3 19.54 26 12 22.77 4.46 26 6.12 17.3 0.23 11.35 8.91 10.26 12 2"></polygon>
+                </svg>
+            );
+        } else if (i - rating === 0.5) {
+            // Bintang setengah
+            stars.push(
+                <svg key={i} width="16" height="16" viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="1.5">
+                    <defs>
+                        <linearGradient id={`grad-${i}`} x1="0%" y1="0%" x2="100%" y2="0%">
+                            <stop offset="50%" stopColor={color} stopOpacity="1" />
+                            <stop offset="50%" stopColor={color} stopOpacity="0.3" />
+                        </linearGradient>
+                    </defs>
+                    <polygon points="12 2 15.09 10.26 23.77 11.35 17.88 17.3 19.54 26 12 22.77 4.46 26 6.12 17.3 0.23 11.35 8.91 10.26 12 2" fill={`url(#grad-${i})`} stroke={color}></polygon>
+                </svg>
+            );
+        } else {
+            // Bintang kosong
+            stars.push(
+                <svg key={i} width="16" height="16" viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="1.5">
+                    <polygon points="12 2 15.09 10.26 23.77 11.35 17.88 17.3 19.54 26 12 22.77 4.46 26 6.12 17.3 0.23 11.35 8.91 10.26 12 2"></polygon>
+                </svg>
+            );
+        }
+    }
+    return <div style={{ display: "flex", gap: 4 }}>{stars}</div>;
+}
+
 function SkillBar({ name, level, color, delay, useInView, COLORS }) {
     const [ref, visible] = useInView(0.1);
+    const rating = getStarRating(level);
+    
     return (
-        <div ref={ref} style={{ marginBottom: 20 }}>
-            <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 6 }}>
-                <span style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 18, fontWeight: 500, color: COLORS.charcoal }}>{name}</span>
-                <span style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 15, fontWeight: 700, color }}>{level}%</span>
+        <div ref={ref} style={{ marginBottom: "clamp(16px, 3vw, 20px)" }}>
+            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "clamp(6px, 2vw, 8px)" }}>
+                <span style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: "clamp(14px, 2.2vw, 16px)", fontWeight: 500, color: COLORS.charcoal }}>{name}</span>
+                <StarRating rating={rating} color={color} />
             </div>
             <div style={{ height: 6, borderRadius: 3, background: `${COLORS.charcoal}10`, overflow: "hidden" }}>
                 <div style={{
@@ -77,22 +121,22 @@ export default function Skills({ COLORS, FadeIn, useInView, SKILLS_DATA }) {
     };
 
     return (
-        <section id="skills" style={{ padding: "100px 24px", background: COLORS.white }}>
+        <section id="skills" style={{ padding: "clamp(60px, 15vw, 100px) 24px", background: COLORS.white }}>
             <div style={{ maxWidth: 1000, margin: "0 auto" }}>
                 <FadeIn>
-                    <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 48 }}>
+                    <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: "clamp(30px, 8vw, 48px)" }}>
                         <div style={{ width: 40, height: 3, background: COLORS.terracotta, borderRadius: 2 }} />
-                        <span style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 13, fontWeight: 700, color: COLORS.terracotta, letterSpacing: "2px" }}>SKILLS & EXPERTISE</span>
+                        <span style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: "clamp(13px, 1.8vw, 14px)", fontWeight: 700, color: COLORS.terracotta, letterSpacing: "2px" }}>SKILLS & EXPERTISE</span>
                     </div>
                 </FadeIn>
 
                 {/* Tab Category */}
                 <FadeIn delay={0.15}>
-                    <div style={{ display: "flex", gap: 8, flexWrap: "wrap", marginBottom: 40 }}>
+                    <div style={{ display: "flex", gap: "clamp(6px, 2vw, 8px)", flexWrap: "wrap", marginBottom: "clamp(30px, 8vw, 40px)" }}>
                         {SKILLS_DATA.map((cat, i) => (
                             <button key={i} onClick={() => setActiveTab(i)} style={{
-                                padding: "10px 22px", borderRadius: 40, border: "none", cursor: "pointer",
-                                fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 13, fontWeight: 600,
+                                padding: "clamp(8px, 2vw, 10px) clamp(14px, 3vw, 22px)", borderRadius: 40, border: "none", cursor: "pointer",
+                                fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: "clamp(11px, 2vw, 13px)", fontWeight: 600,
                                 background: i === activeTab ? `linear-gradient(135deg, ${COLORS.terracotta}, ${COLORS.terracotta}dd)` : COLORS.sand,
                                 color: i === activeTab ? "#fff" : COLORS.charcoal,
                                 boxShadow: i === activeTab ? `0 4px 20px ${COLORS.terracotta}30` : "none",
@@ -104,7 +148,7 @@ export default function Skills({ COLORS, FadeIn, useInView, SKILLS_DATA }) {
 
                 {/* Skills Bar Container */}
                 <FadeIn delay={0.25}>
-                    <div style={{ background: COLORS.sand, borderRadius: 24, padding: 40, border: `1px solid ${COLORS.charcoal}08` }}>
+                    <div style={{ background: COLORS.sand, borderRadius: 24, padding: "clamp(24px, 5vw, 40px)", border: `1px solid ${COLORS.charcoal}08` }}>
                         {SKILLS_DATA[activeTab].skills.map((s, i) => (
                             <SkillBar key={`${activeTab}-${i}`} name={s.name} level={s.level}
                                 color={i % 2 === 0 ? COLORS.terracotta : COLORS.sage} delay={i * 0.1} useInView={useInView} COLORS={COLORS} />
@@ -114,20 +158,20 @@ export default function Skills({ COLORS, FadeIn, useInView, SKILLS_DATA }) {
 
                 {/* Certifications Section */}
                 <FadeIn delay={0.35}>
-                    <h3 style={{ fontFamily: "'DM Serif Display', Georgia, serif", fontSize: 24, color: COLORS.charcoal, marginTop: 56, marginBottom: 32 }}>Certifications</h3>
+                    <h3 style={{ fontFamily: "'DM Serif Display', Georgia, serif", fontSize: "clamp(20px, 3.5vw, 24px)", color: COLORS.charcoal, marginTop: "clamp(40px, 10vw, 56px)", marginBottom: "clamp(20px, 5vw, 32px)" }}>Certifications</h3>
 
-                    <div style={{ display: "flex", flexDirection: "column", gap: 32 }}>
+                    <div style={{ display: "flex", flexDirection: "column", gap: "clamp(20px, 5vw, 32px)" }}>
                         {sortedYears.map((year) => (
                             <div key={year}>
-                                <div style={{ display: "flex", alignItems: "center", gap: 16, marginBottom: 16 }}>
-                                    <h4 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 20, fontWeight: 700, color: COLORS.charcoal }}>{year}</h4>
+                                <div style={{ display: "flex", alignItems: "center", gap: 16, marginBottom: "clamp(12px, 3vw, 16px)" }}>
+                                    <h4 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: "clamp(15px, 2.5vw, 18px)", fontWeight: 700, color: COLORS.charcoal }}>{year}</h4>
                                     <div style={{ flexGrow: 1, height: 1, background: `${COLORS.charcoal}15` }} />
                                 </div>
 
-                                <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(280px, 1fr))", gap: 16 }}>
+                                <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(250px, 1fr))", gap: "clamp(12px, 3vw, 16px)" }}>
                                     {groupedCerts[year].map((c) => (
                                         <div key={c.id} onClick={() => setSelectedCert(c)} style={{
-                                            padding: "18px 22px", borderRadius: 14, background: COLORS.white,
+                                            padding: "clamp(14px, 3vw, 18px) clamp(16px, 3vw, 22px)", borderRadius: 14, background: COLORS.white,
                                             border: `1px solid ${c.accent}30`, display: "flex", alignItems: "center", gap: 14,
                                             cursor: "pointer", transition: "transform 0.2s, box-shadow 0.2s",
                                             boxShadow: "0 2px 8px rgba(0,0,0,0.04)"
@@ -143,8 +187,8 @@ export default function Skills({ COLORS, FadeIn, useInView, SKILLS_DATA }) {
                                         >
                                             <div style={{ width: 10, height: 10, borderRadius: "50%", background: c.accent, flexShrink: 0 }} />
                                             <div>
-                                                <div style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 14, fontWeight: 600, color: COLORS.charcoal }}>{c.name}</div>
-                                                <div style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 12, color: `${COLORS.charcoal}70`, marginTop: 2 }}>Click to view details</div>
+                                                <div style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: "clamp(12px, 2vw, 13px)", fontWeight: 600, color: COLORS.charcoal }}>{c.name}</div>
+                                                <div style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: "clamp(10px, 1.5vw, 11px)", color: `${COLORS.charcoal}70`, marginTop: 2 }}>Click to view details</div>
                                             </div>
                                         </div>
                                     ))}
