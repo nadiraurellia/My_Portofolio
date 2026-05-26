@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 const project = [
   {
     id: 1,
-    title: "[IDN] Redesign of Procurement Process for Java Hill's Honey Distributor using Business Process Modeling Notation and Analysis",
+    title: "Pemodelan dan Analisis Proses Bisnis Pengadaan Barang pada Distributor Java Hill's Honey",
     shortDesc: "Pemroses pemodelan bisnis pengadaan barang pada Java Hill's Honey",
     thumbnail: "/img/portofolio/bpmn.png",
     details: {
@@ -25,68 +25,149 @@ const project = [
   },
   {
     id: 2,
-    title: "HR Analytics Dashboard",
-    shortDesc: "Power BI dashboard for visualizing employee retention and performance metrics.",
-    thumbnail: "/img/thumbnail_analytics.png",
+    title: "Dashboard Analisis Pengiriman Pesanan E-Commerce Berbasis Data Warehouse dan Balanced Scorecard",
+    shortDesc: "Looker dashboard for visualizing employee retention and performance metrics.",
+    thumbnail:"/img/portofolio/Dashboard.png",
     details: {
       content: [
-        { type: "text", value: "This project focused on developing a comprehensive HR Analytics Dashboard using Power BI to provide actionable insights into employee turnover, performance scores, and training effectiveness. The primary goal was to shift the HR department from a reactive to a data-driven, proactive stance on talent management." },
-        { type: "diagram", src: "/img/diagram_process.png", caption: "Diagram 1: Data Architecture — HR data flow from SAP HCM to Power BI" },
-        { type: "text", value: "The dashboard aggregates data from the SAP HCM module and external survey systems. Key features include drill-down capabilities by department, role, and tenure, as well as interactive filters for historical trend analysis. A predictive attrition model was also integrated to flag at-risk employees." },
-        { type: "diagram", src: "/img/diagram_process.png", caption: "Diagram 2: Dashboard Overview — Key HR metrics and KPI visualization" },
-        { type: "text", value: "The implementation resulted in a measurable improvement in HR decision-making speed. Management was able to identify retention risks 2 months earlier than before, contributing to a more proactive approach to talent development and a reduction in voluntary turnover." },
+        { type: "text", value: "Tantangan utama e-commerce saat ini adalah mengolah data transaksi harian kompleks dari sistem OLTP menjadi informasi strategis. Proyek ini memanfaatkan Brazilian E-Commerce Public Dataset by Olist yang berisi lebih dari 100.000 transaksi harian, lalu dipadukan dengan data sekunder hari libur nasional Brasil untuk mengevaluasi faktor kalender terhadap efisiensi operasional pengiriman. Fokus utamanya adalah mengintegrasikan data tersebut ke dalam lingkungan analitikal agar siap digunakan untuk mendukung pengambilan keputusan bisnis." },
+        { type: "text", value: "Pendekatan Balanced Scorecard diterapkan dengan berfokus pada Perspektif Proses Bisnis Internal untuk mengevaluasi aktivitas inti pemenuhan pesanan (fulfillment). Melalui perspektif ini, dirumuskan tujuan strategis untuk meningkatkan efisiensi operasional logistik serta keandalan pengiriman guna memaksimalkan profitabilitas perusahaan secara berkelanjutan. Sasaran tersebut kemudian diturunkan menjadi lima indikator kinerja utama (KPI) yang bersifat terukur dan actionable." },
+        { type: "diagram", src: "/img/portofolio/starscheme.png", caption: "Rancangan Starscheme data" },
+        { type: "text", value: "Arsitektur data warehouse berhasil dirancang menggunakan Star Schema yang berpusat pada tabel fakta Fact_Sales untuk menyimpan ukuran kinerja numerik seperti harga produk, ongkos kirim, dan durasi proses. Tabel fakta ini terhubung langsung ke enam tabel dimensi analitis, meliputi Dim_Date, Dim_Customer, Dim_Seller, Dim_Product, Dim_Payment, dan Dim_Review. Model multidimensional ini mempermudah proses querying cepat dan menghasilkan struktur data yang bersih serta siap dianalisis dari berbagai sudut pandang bisnis." },
+        { type: "text", value: "Sebelum masuk ke tahap visualisasi, data mentah divalidasi dan diolah melalui proses ETL terotomatisasi menggunakan Pentaho untuk pembersihan, pengayaan geolokasi, dan standardisasi ke RDBMS MySQL. Selanjutnya, diterapkan pemodelan Data Mining menggunakan algoritma Random Forest untuk klasifikasi prediktif hambatan (bottleneck) penjual, serta metode K-Means Clustering untuk segmentasi performa logistik. Kombinasi ini memastikan data yang disajikan tidak hanya bersifat historis, tetapi juga memiliki kemampuan analitik prediktif." },
+        { type: "diagram", src: "/img/portofolio/Dashboard.png", caption : "Dashboard menggunakan Looker Studio untuk menganalisis kinerja pengiriman pada E-Commerce" },
+        { type: "text", value: "Seluruh metrik KPI, pola historis, dan hasil pemodelan prediktif tersebut diintegrasikan ke dalam dashboard Business Intelligence interaktif menggunakan Looker Studio. Dashboard ini menyajikan visualisasi sebaran operasional, analisis pendapatan, hingga metrik klasifikasi bottleneck secara real-time. Hasil visualisasi ini memberikan kemudahan bagi manajemen untuk memantau kesehatan rantai pasok secara komprehensif dan mengambil tindakan korektif secara proaktif." },
+        { type: "text", value: "Evaluasi performa operasional menunjukkan hasil yang positif, di antaranya pencapaian On-Time Delivery Rate sebesar 92,09% yang berhasil melampaui target minimum 90%. Selain itu, metrik Total Revenue per Category mengonfirmasi kategori unggulan seperti bed_bath_table sukses menghasilkan pendapatan di atas 10.000. Di sisi pengawasan internal, KPI lainnya memantau Freight Cost Ratio agar tetap efisien di bawah 20% serta memastikan batas waktu Seller Processing Time rata-rata berada di bawah 10 hari." },
       ],
       tableData: [
-        ["Metric", "Source System", "Update Frequency", "Target KPI"],
-        ["Turnover Rate", "SAP HCM", "Monthly", "< 5%"],
-        ["Training ROI", "LMS", "Quarterly", "> 120%"],
-        ["Engagement Score", "SurveyMonkey", "Bi-annually", "> 8.0/10"],
+        ["No.", "Nama KPI", "Definisi KPI", "Tercapai", "Tidak Tercapai"],
+        ["1", "On-Time Delivery Rate", "Persentase pesanan yang diterima pelanggan pada atau sebelum tanggal estimasi pengiriman dengan tingkat pencapaian di atas 90%.", "V"],
+        ["2", "Total Revenue per Category", "Total akumulasi nilai pendapatan yang dihasilkan dari penjualan produk berdasarkan kategori produk, minimal ada satu kategori yang memiliki revenue di atas 10.000", "V"],
+        ["3", "Freight Cost Ratio", "Proporsi biaya ongkos kirim terhadap total nilai penjualan yang dijaga di bawah 20%.", " ", "V"],
+        ["4","Seller Handover Performance Classification","Klasifikasi performa seller ke dalam kategori Efficient (Cepat) atau Bottleneck (Lambat) berdasarkan karakteristik pesanan sebelum barang diserahkan ke kurir dengan tingkat presisi bottleneck < 80%.","V",""],
+        ["5","Seller Processing Time","Memastikan lebih dari 95% populasi penjual masuk ke dalam kategori efisien (Segmen A & B) dengan rata-rata waktu proses di bawah 10 hari untuk menjaga stabilitas logistik.","V",""],
       ]
     }
   },
   {
     id: 3,
-    title: "Business Process Reengineering",
-    shortDesc: "Redesigning core financial workflows to eliminate bottlenecks and redundancy.",
-    thumbnail: "/img/thumbnail_erp.png",
+    title: "Project Management dengan Jira untuk project GroceryPRO",
+    shortDesc: "Project Management SCRUM dengan Jira dalam pembuatan proyek GroceryPRO",
+    thumbnail: "/img/portofolio/jira3.png",
     details: {
       content: [
-        { type: "text", value: "This initiative was triggered by growing complaints from the sales team about slow order processing times. A cross-functional team was assembled to conduct a deep dive into the Order-to-Cash (O2C) cycle. Through stakeholder interviews and process walkthroughs, we identified 4 major bottlenecks that were causing significant delays." },
-        { type: "diagram", src: "/img/diagram_process.png", caption: "Diagram 1: O2C Process Map — Identified bottlenecks highlighted in red" },
-        { type: "text", value: "Based on the gap analysis, an automated solution was proposed within SAP SD and FI modules. Manual credit approval steps for regular customers were replaced with a rule-based engine, and invoicing was connected directly to the delivery confirmation event. The redesigned process reduced the end-to-end cycle time by 35%, from an average of 5 days to 3.25 days." },
+        { type: "text", value: "GroceryPro merupakan proyek website Inventory Management dan POS untuk UMKM kecil seperti toko kelontong. Proyek ini dikembangkan menggunakan pendekatan SCRUM dengan bantuan Jira untuk mengelola backlog, sprint, dan progress development secara kolaboratif. Fokus penggunaan Jira juga menjadi bagian dari pembelajaran praktikum agar terbiasa dengan workflow industri software development." },
+        { type: "text", value: "Pada proyek ini saya bukan Project Manager utama, melainkan bagian dari tim yang terlibat dalam proses analisis dan pengelolaan task development. Penggunaan Jira dilakukan sebagai sarana pembelajaran implementasi SCRUM, pengelolaan sprint, serta pemahaman workflow proyek secara profesional dalam lingkungan tim." },
+        { type: "diagram", src: "/img/portofolio/jira1.png", caption: "Scrum Board sprint 2" },
+        { type: "text", value: "Pada tampilan Scrum Board, task development dikelompokkan berdasarkan status seperti To Do, In Progress, Ready to Test, dan Done. Board ini digunakan untuk memantau progress sprint secara visual serta membantu tim dalam tracking pekerjaan dan kolaborasi selama proses development berlangsung." },
+        { type: "diagram", src: "/img/portofolio/jira2.png", caption: "Product Backlog" },
+        { type: "text", value: "Tampilan backlog menunjukkan daftar user story dan fitur yang diprioritaskan untuk sprint berjalan. Setiap task memiliki status, estimasi, assignee, dan due date sehingga memudahkan proses sprint planning serta monitoring workload tim development." },
+        { type: "diagram", src: "/img/portofolio/jira3.png", caption: "Timeline and Sprint Planning" },
+        { type: "text", value: "Timeline digunakan untuk mengatur perencanaan sprint dan roadmap pengerjaan fitur selama proyek berlangsung. Melalui tampilan ini, tim dapat memonitor durasi sprint, progres release, serta distribusi pengerjaan fitur agar development tetap sesuai target dan timeline proyek." },
       ],
       tableData: [
-        ["Process Step", "As-Is Time", "To-Be Time", "Improvement"],
-        ["Order Entry", "45 mins", "15 mins", "66%"],
-        ["Credit Approval", "24 hrs", "Automated", "100%"],
-        ["Invoicing", "2 hrs", "30 mins", "75%"],
-      ]
+        ["Nama anggota", "Peran"],
+        ["Rayhan Arya", "Project Manager,Scrum Master, Developer"],
+        ["Aurellia Nadira Putri", "Product Owner, System Analyst and Developer"],
+        ["Adam Priyatna", "System Analyst andDeveloper"],
+        ["Junhaikal Syahwarna", "Developer"],
+        ["Charles Prayoga Sanjaya", "Developer"],
+        ["Rachmat Akbar", "Developer"],
+      ],
     }
   },
+
   {
     id: 4,
-    title: "Sales Data Migration",
-    shortDesc: "Data cleansing and migration strategy for a major CRM rollout.",
-    thumbnail: "/img/thumbnail_analytics.png",
+    title: "Project Management untuk Divisi Operation ERPify_",
+    shortDesc: "Project Management untuk konten divisi Operation menggunakan Notion",
+    thumbnail: "/img/portofolio/opr2.png",
     details: {
       content: [
-        { type: "text", value: "This project managed the end-to-end data migration strategy for transitioning over 1.2 million customer records from a legacy on-premise CRM to a new cloud-based platform. The project began with a thorough data profiling exercise to understand the quality and structure of the source data, revealing that approximately 15% of records required cleansing before migration." },
-        { type: "diagram", src: "/img/diagram_process.png", caption: "Diagram 1: Data Migration Architecture — ETL pipeline from legacy CRM to cloud" },
-        { type: "text", value: "A multi-stage ETL (Extract, Transform, Load) pipeline was designed to handle data type transformations, deduplication, and business rule validations. Three full mock migrations were performed prior to go-live to validate data integrity and system performance under load. Each mock migration's results were used to refine the cleansing scripts." },
-        { type: "diagram", src: "/img/diagram_process.png", caption: "Diagram 2: Data Quality Report — Before & after cleansing comparison" },
-        { type: "text", value: "The final migration was executed over a weekend maintenance window with zero unplanned downtime. Post-migration validation confirmed 99.9% data accuracy. A data governance framework was also established to ensure ongoing data quality in the new system." },
+        { type: "text", value: "Sebagai Ketua Divisi Operasional (Kreatif), saya merancang sistem manajemen kerja di Notion untuk menyatukan alur kerja dua mata kuliah dan strategi branding media sosial. Sistem ini dibuat untuk memetakan tugas tim secara efisien, menghindari bentrokan jadwal, dan memastikan komunikasi berjalan lancar demi mencapai target operasional." },
+        { type: "diagram", src: "/img/portofolio/opr1.png", caption: "" },
+        { type: "text", value: "Halaman ini adalah pusat kendali untuk mencatat jadwal rapat progress dan pembahasan yang akan didiskusikan selama rapat, lengkap dengan rundown dan list pembahasan." },
+        { type: "diagram", src: "/img/portofolio/opr2.png", caption: "" },
+        { type: "text", value: "Halaman ini didedikasikan sebagai dasbor koordinasi untuk masing-masing mata kuliah dan konten sosial media , fokus pada pemetaan beban kerja tim dan tenggat waktu proyek. Menggunakan visualisasi ala papan Kanban, saya bisa memantau progres setiap tugas dengan mudah, memitigasi risiko keterlambatan, dan membagi porsi kerja tim secara adil." },
+        { type: "diagram", src: "/img/portofolio/opr3.png", caption: "" },
+        { type: "text", value: "Halaman ini berfungsi sebagai ruang kerja digital untuk semua proyek, merangkum semua tugas mulai dari tahap riset awal hingga eksekusi final. Dengan sistem dokumentasi yang terpusat ini, seluruh anggota tim memiliki acuan yang sama (single source of truth), sehingga proses kerja jadi lebih transparan dan pengambilan keputusan bisa lebih cepat." },
+        { type: "diagram", src: "/img/portofolio/opr4.png", caption: "" },
+        { type: "text", value: "Halaman ini dirancang sebagai pusat komando operasional divisi yang mengintegrasikan seluruh basis data proyek, direktori komunikasi tim, dan ringkasan objektif strategis. Menggunakan arsitektur informasi yang intuitif, halaman ini memfasilitasi kolaborasi lintas fungsional yang mulus, meminimalkan hambatan komunikasi (communication silo), dan memberikan visibilitas menyeluruh terhadap kesehatan operasional organisasi" },
       ],
       tableData: [
-        ["Object", "Total Records", "Cleansed Records", "Success Rate"],
-        ["Customers", "1,200,500", "1,180,000", "98.3%"],
-        ["Sales Orders", "5,500,000", "5,490,000", "99.8%"],
-        ["Products", "45,000", "44,500", "98.9%"],
+        ["-"],
       ]
     }
   },
   {
     id: 5,
-    title: "IT Architecture Assessment",
+    title: "Business Process Analysis & Improvement for Supply Chain Operations at Erajaya Swasembada",
+    shortDesc: "Evaluating enterprise architecture using TOGAF methodology.",
+    thumbnail: "/img/portofolio/value chain.png",
+    details: {
+      content: [
+        { type: "text", value: "Proses peminjaman dan pengelolaan barang pada divisi General Affairs (GA) di Erajaya Swasembada masih dilakukan secara manual melalui form dan chat, sehingga approval sulit dilacak dan data stok sering tidak real-time. Untuk mengatasi hal tersebut, dirancang sistem terintegrasi dengan workflow approval otomatis dan monitoring stok gudang secara digital." },
+        { type: "diagram", src: "/img/portofolio/stakeholder.png", caption: "Stakeholder map matrix pada PT. Erajaya" },
+        { type: "text", value: "Analisis stakeholder dilakukan untuk mengidentifikasi pihak yang terlibat dalam proses peminjaman barang, mulai dari GA Staff, Warehouse, Procurement, hingga Management dan IT. Hasil analisis menunjukkan kebutuhan utama berupa sistem yang mudah digunakan, terintegrasi, serta mampu memberikan tracking dan notifikasi approval secara otomatis." },
+        { type: "diagram", src: "/img/portofolio/value chain.png", caption: "Value Chain Diagram untuk PT. Erajaya" },
+        { type: "text", value: "Value chain digunakan untuk memetakan aktivitas utama seperti pengajuan permintaan barang, pengelolaan stok gudang, approval, hingga pengadaan barang. Sistem terintegrasi yang diusulkan membantu meningkatkan efisiensi operasional melalui otomatisasi workflow, monitoring real-time, dan pengurangan proses manual antar divisi." },
+        { type: "diagram", src: "/img/portofolio/Goals.png", caption: "Goals/Objective TO-BE PT.Erajaya" },
+        { type: "text", value: "Analisis kebutuhan dilakukan untuk mendukung transformasi proses GA dari manual menjadi digital. Solusi yang dirancang berfokus pada otomatisasi approval, digital form request, validasi data otomatis, serta fitur tracking status permintaan agar proses peminjaman barang menjadi lebih cepat dan transparan." },
+        { type: "diagram", src: "/img/portofolio/gap.png", caption: "GAP Analysis pada PT. Erajaya yang masih manual" },
+        { type: "text", value: "Hasil GAP analysis menunjukkan bahwa proses existing masih memiliki banyak kendala, seperti approval manual, monitoring stok yang tidak terpusat, dan tidak adanya tracking permintaan barang. Solusi yang diusulkan meliputi implementasi inventory system terintegrasi, workflow approval otomatis, dashboard monitoring, serta pelacakan status barang dan permintaan secara real-time." },
+        
+      ],
+      tableData: [
+        ["Problem", "Impact", "Solution", "Result"],
+
+  [
+    "Peminjaman barang masih dilakukan manual",
+    "Proses approval lambat dan sulit dilacak",
+    "Implementasi workflow approval otomatis berbasis sistem",
+    "Approval lebih cepat dan status permintaan dapat dipantau real-time"
+  ],
+
+  [
+    "Pencatatan stok gudang belum real-time",
+    "Sering terjadi selisih data stok dan human error",
+    "Penerapan barcode scanning dan inventory management system",
+    "Data stok ter-update otomatis dan lebih akurat"
+  ],
+
+  [
+    "Sistem GA, Procurement, dan Warehouse belum terintegrasi",
+    "Input data dilakukan berulang di beberapa sistem",
+    "Pengembangan sistem terintegrasi melalui Integration API",
+    "Proses bisnis lebih efisien dan sinkron antar divisi"
+  ],
+
+  [
+    "Monitoring permintaan barang masih manual",
+    "User kesulitan mengetahui status request",
+    "Pembuatan dashboard monitoring dan tracking request",
+    "Status permintaan dapat dipantau secara transparan"
+  ],
+
+  [
+    "Tidak ada notifikasi stok minimum",
+    "Pengadaan barang sering terlambat",
+    "Implementasi automated stock alert system",
+    "Procurement dapat melakukan pengadaan lebih cepat"
+  ],
+
+  [
+    "Pencatatan penerimaan barang masih manual",
+    "Riwayat barang sulit ditelusuri",
+    "Digitalisasi goods receipt dan logging transaksi",
+    "Tracking barang dan audit trail menjadi lebih jelas"
+  ]
+      ]
+    }
+  },
+
+   {
+    id: 6,
+    title: "Rancangan sistem website digitalisasi untuk UMKM Java Hill's Honey",
     shortDesc: "Evaluating enterprise architecture using TOGAF methodology.",
     thumbnail: "/img/thumbnail_erp.png",
     details: {
@@ -122,16 +203,16 @@ export default function Portfolio({ COLORS, FadeIn }) {
   }, [selectedProject]);
 
   return (
-    <section id="portfolio" style={{ padding: "100px 24px", background: COLORS.white }}>
+    <section id="portfolio" style={{ padding: "clamp(60px, 15vw, 100px) 24px", background: COLORS.white }}>
       <div style={{ maxWidth: 1000, margin: "0 auto" }}>
         <FadeIn>
-          <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 48 }}>
+          <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: "clamp(30px, 8vw, 48px)" }}>
             <div style={{ width: 40, height: 3, background: COLORS.terracotta, borderRadius: 2 }} />
-            <span style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 25, fontWeight: 700, color: COLORS.terracotta, letterSpacing: "2px" }}>PORTFOLIO</span>
+            <span style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: "clamp(13px, 1.8vw, 14px)", fontWeight: 700, color: COLORS.terracotta, letterSpacing: "2px" }}>PORTFOLIO</span>
           </div>
         </FadeIn>
 
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(300px, 1fr))", gap: 32 }}>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(250px, 1fr))", gap: "clamp(20px, 5vw, 32px)" }}>
           {project.map((proj, i) => (
             <FadeIn key={proj.id} delay={i * 0.1}>
               <div
@@ -150,12 +231,12 @@ export default function Portfolio({ COLORS, FadeIn }) {
                   e.currentTarget.style.boxShadow = "0 4px 12px rgba(0,0,0,0.05)";
                 }}
               >
-                <div style={{ height: 180, overflow: "hidden", position: "relative" }}>
+                <div style={{ height: "clamp(140px, 30vw, 180px)", overflow: "hidden", position: "relative" }}>
                   <img src={proj.thumbnail} alt={proj.title} style={{ width: "100%", height: "100%", objectFit: "cover", transition: "transform 0.5s" }} />
                 </div>
-                <div style={{ padding: 27, display: "flex", flexDirection: "column", flexGrow: 1 }}>
-                  <h3 style={{ fontFamily: "'DM Serif Display', Georgia, serif", fontSize: 25, color: COLORS.charcoal, marginBottom: 12 }}>{proj.title}</h3>
-                  <p style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 18, color: `${COLORS.charcoal}99`, lineHeight: 1.6, flexGrow: 1 }}>{proj.shortDesc}</p>
+                <div style={{ padding: "clamp(18px, 4vw, 27px)", display: "flex", flexDirection: "column", flexGrow: 1 }}>
+                  <h3 style={{ fontFamily: "'DM Serif Display', Georgia, serif", fontSize: "clamp(18px, 3vw, 22px)", color: COLORS.charcoal, marginBottom: 12 }}>{proj.title}</h3>
+                  <p style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: "clamp(13px, 2vw, 15px)", color: `${COLORS.charcoal}99`, lineHeight: 1.6, flexGrow: 1 }}>{proj.shortDesc}</p>
                   <div style={{ marginTop: 20, display: "flex", alignItems: "center", gap: 6, color: COLORS.terracotta, fontSize: 13, fontWeight: 600, fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
                     View Details
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M12 5l7 7-7 7" /></svg>
@@ -190,19 +271,19 @@ export default function Portfolio({ COLORS, FadeIn }) {
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
             </button>
 
-            <div style={{ padding: "40px 48px" }}>
+            <div style={{ padding: "clamp(24px, 5vw, 48px)" }}>
               <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 24 }}>
                 <div style={{ padding: "6px 14px", borderRadius: 20, background: `${COLORS.terracotta}15`, color: COLORS.terracotta, fontSize: 12, fontWeight: 700, fontFamily: "'Plus Jakarta Sans', sans-serif", letterSpacing: "1px" }}>PROJECT</div>
               </div>
 
-              <h2 style={{ fontFamily: "'DM Serif Display', Georgia, serif", fontSize: "clamp(28px, 4vw, 40px)", color: COLORS.charcoal, marginBottom: 40, lineHeight: 1.2 }}>{selectedProject.title}</h2>
+              <h2 style={{ fontFamily: "'DM Serif Display', Georgia, serif", fontSize: "clamp(24px, 4vw, 36px)", color: COLORS.charcoal, marginBottom: 40, lineHeight: 1.2 }}>{selectedProject.title}</h2>
 
               {/* --- DYNAMIC CONTENT BLOCKS --- */}
               <div style={{ display: "flex", flexDirection: "column", gap: 32, marginBottom: 48 }}>
                 {selectedProject.details.content.map((block, idx) => {
                   if (block.type === "text") {
                     return (
-                      <p key={idx} style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 15, color: `${COLORS.charcoal}cc`, lineHeight: 1.85, margin: 0 }}>
+                      <p key={idx} style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: "clamp(13px, 2vw, 14px)", color: `${COLORS.charcoal}cc`, lineHeight: 1.85, margin: 0 }}>
                         {block.value}
                       </p>
                     );
@@ -214,7 +295,7 @@ export default function Portfolio({ COLORS, FadeIn }) {
                           <img src={block.src} alt={block.caption || `Diagram ${idx + 1}`} style={{ width: "100%", display: "block" }} />
                         </div>
                         {block.caption && (
-                          <p style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 13, color: `${COLORS.charcoal}70`, marginTop: 10, textAlign: "center", fontStyle: "italic" }}>
+                          <p style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: "clamp(11px, 1.8vw, 12px)", color: `${COLORS.charcoal}70`, marginTop: 10, textAlign: "center", fontStyle: "italic" }}>
                             {block.caption}
                           </p>
                         )}

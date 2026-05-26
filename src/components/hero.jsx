@@ -15,7 +15,7 @@ export default function Hero({ COLORS, FadeIn }) {
 
   const roles = [
     "Business Analyst",
-    "ERP Specialist",
+    "ERP Enthusiast",
     "Data Analyst",
     "Process Optimizer",
   ];
@@ -199,7 +199,7 @@ export default function Hero({ COLORS, FadeIn }) {
               display: "inline-block",
               padding: "6px 20px",
               borderRadius: 40,
-              fontSize: 13,
+              fontSize: "clamp(11px, 1.8vw, 12px)",
               background: `${COLORS.terracotta}18`,
               color: COLORS.terracotta,
               fontWeight: 600,
@@ -218,7 +218,7 @@ export default function Hero({ COLORS, FadeIn }) {
           <h1
             style={{
               fontFamily: "'DM Serif Display', Georgia, serif",
-              fontSize: "clamp(52px, 8vw, 84px)",
+              fontSize: "clamp(40px, 7vw, 60px)",
               color: COLORS.charcoal,
               lineHeight: 1.1,
               margin: "16px 0",
@@ -247,7 +247,7 @@ export default function Hero({ COLORS, FadeIn }) {
             <span
               style={{
                 fontFamily: "'Outfit', sans-serif",
-                fontSize: "clamp(26px, 4vw, 38px)",
+                fontSize: "clamp(18px, 3vw, 26px)",
                 color: COLORS.sage,
                 fontWeight: 600,
                 animation: "fadeSwitch 2.5s ease infinite",
@@ -262,7 +262,7 @@ export default function Hero({ COLORS, FadeIn }) {
           <p
             style={{
               fontFamily: "'Outfit', sans-serif",
-              fontSize: 22,
+              fontSize: "clamp(14px, 2.2vw, 16px)",
               lineHeight: 1.75,
               color: `${COLORS.charcoal}bb`,
               maxWidth: 580,
@@ -298,7 +298,7 @@ export default function Hero({ COLORS, FadeIn }) {
                 cursor: "pointer",
                 background: COLORS.terracotta,
                 color: "#fff",
-                fontSize: 20,
+                fontSize: "clamp(14px, 2vw, 16px)",
                 fontWeight: 600,
                 fontFamily: "'Outfit', sans-serif",
                 letterSpacing: "0.3px",
@@ -321,7 +321,7 @@ export default function Hero({ COLORS, FadeIn }) {
                 cursor: "pointer",
                 background: "rgba(255,255,255,0.35)",
                 color: COLORS.charcoal,
-                fontSize: 20,
+                fontSize: "clamp(14px, 2vw, 16px)",
                 fontWeight: 600,
                 fontFamily: "'Outfit', sans-serif",
                 letterSpacing: "0.3px",
@@ -358,7 +358,7 @@ export default function Hero({ COLORS, FadeIn }) {
                   style={{
                     fontFamily:
                       "'DM Serif Display', Georgia, serif",
-                    fontSize: 42,
+                    fontSize: "clamp(32px, 5vw, 40px)",
                     color: COLORS.charcoal,
                     fontWeight: 400,
                   }}
@@ -369,10 +369,10 @@ export default function Hero({ COLORS, FadeIn }) {
                 <div
                   style={{
                     fontFamily: "'Outfit', sans-serif",
-                    fontSize: 22,
+                    fontSize: "clamp(13px, 2vw, 15px)",
                     color: `${COLORS.charcoal}80`,
                     letterSpacing: "1px",
-                    marginTop: 6,
+                    marginTop: 10,
                   }}
                 >
                   {s.label}
