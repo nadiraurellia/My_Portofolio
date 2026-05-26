@@ -8,9 +8,15 @@ export default function Experience({ COLORS, FadeIn, EXPERIENCES }) {
     <section id="experience" style={{ padding: "clamp(60px, 15vw, 100px) 24px", background: COLORS.sand }}>
       <div style={{ maxWidth: 1000, margin: "0 auto" }}>
         <FadeIn>
+up-porto
           <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: "clamp(30px, 8vw, 48px)" }}>
             <div style={{ width: 40, height: 3, background: COLORS.terracotta, borderRadius: 2 }} />
             <span style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: "clamp(13px, 1.8vw, 14px)", fontWeight: 700, color: COLORS.terracotta, letterSpacing: "2px" }}>EXPERIENCE</span>
+
+          <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 48 }}>
+            <div style={{ width: 40, height: 4, background: COLORS.terracotta, borderRadius: 2 }} />
+            <span style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 22, fontWeight: 700, color: COLORS.terracotta, letterSpacing: "2px" }}>EXPERIENCE</span>
+main
           </div>
         </FadeIn>
 
